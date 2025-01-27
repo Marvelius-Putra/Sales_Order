@@ -9,10 +9,11 @@
     const cancelItemBtns = document.querySelectorAll('.cancel-item-btn');
     const itemsTableBody = document.querySelector('.items-table tbody');
     const addItemBtn = document.getElementById('add-item-btn');
-    const saveOrderBtn = document.getElementById('save-btn'); 
+    const saveOrderBtn = document.getElementById('save-btn');
 
-    let temporaryData = []; 
-    let deletedItems = []; 
+    let temporaryData = [];
+    let deletedItems = [];
+    let originalItemData = []; // Store original data for rows
 
     // Function to refresh row numbers
     function refreshRowNumbers() {
@@ -28,18 +29,18 @@
 
         const newRow = document.createElement('tr');
         newRow.innerHTML = `
-    <td>${newRowIndex + 1}</td>
-    <td>
-        <button type="button" class="edit-item-btn" data-index="${newRowIndex}" style="display:none;">✎</button>
-        <button type="button" class="delete-item-btn" data-index="${newRowIndex}" style="display:none;">🗑️</button>
-        <button type="button" class="save-item-btn" data-index="${newRowIndex}">💾</button>
-        <button type="button" class="cancel-item-btn" data-index="${newRowIndex}">❌</button>
-    </td>
-    <td><input type="text" class="form-control editable" placeholder="Item Name"></td>
-    <td><input type="number" class="form-control editable inputQty" placeholder="Qty" min="1"></td>
-    <td><input type="number" class="form-control editable inputPrice" placeholder="Price" step="0.01"></td>
-    <td>0</td>
-    `;
+            <td>${newRowIndex + 1}</td>
+            <td>
+                <button type="button" class="edit-item-btn" data-index="${newRowIndex}" style="display:none;">✎</button>
+                <button type="button" class="delete-item-btn" data-index="${newRowIndex}" style="display:none;">🗑️</button>
+                <button type="button" class="save-item-btn" data-index="${newRowIndex}">💾</button>
+                <button type="button" class="cancel-item-btn" data-index="${newRowIndex}">❌</button>
+            </td>
+            <td><input type="text" class="form-control editable" placeholder="Item Name"></td>
+            <td><input type="number" class="form-control editable inputQty" placeholder="Qty" min="1"></td>
+            <td><input type="number" class="form-control editable inputPrice" placeholder="Price" step="0.01"></td>
+            <td>0</td>
+        `;
         itemsTableBody.appendChild(newRow);
 
         const inputs = newRow.querySelectorAll('input');
@@ -54,6 +55,7 @@
         cancelBtn.style.display = 'inline-block';
 
         attachRowEventListeners(newRow, newRowIndex);
+        storeOriginalData(newRow, newRowIndex); // Store original data for the new row
     }
 
     // Function to attach event listeners to row buttons
@@ -69,7 +71,7 @@
                 input.removeAttribute('readonly');
                 input.classList.add('editable');
                 input.style.border = '1px solid #ccc';
-                input.style.background= '#ccc';
+                input.style.background = '#ccc';
             });
             saveBtn.style.display = 'inline-block';
             cancelBtn.style.display = 'inline-block';
@@ -101,6 +103,17 @@
         });
 
         cancelBtn.addEventListener('click', function () {
+            const savedData = originalItemData[index]; // Get original data
+
+            // Restore the original values
+            const inputs = row.querySelectorAll('input');
+            inputs[0].value = savedData.itemName;  // Item Name
+            inputs[1].value = savedData.quantity;  // Qty
+            inputs[2].value = savedData.price;     // Price
+
+            // Update the "Total" column
+            row.querySelector('td:last-child').textContent = savedData.total.toLocaleString('id-ID');
+
             inputs.forEach(input => {
                 input.setAttribute('readonly', 'true');
                 input.classList.remove('editable');
@@ -112,23 +125,15 @@
             cancelBtn.style.display = 'none';
             editBtn.style.display = 'inline-block';
             deleteBtn.style.display = 'inline-block';
-
-            if (temporaryData[index]) {
-                const savedData = temporaryData[index];
-                inputs[0].value = savedData.itemName || '';
-                inputs[1].value = savedData.quantity || 0;
-                inputs[2].value = savedData.price || 0;
-                row.querySelector('td:last-child').textContent = savedData.total.toLocaleString('id-ID');
-            }
         });
 
         deleteBtn.addEventListener('click', function () {
             const confirmDelete = window.confirm('Do you really want to delete this item?');
             if (confirmDelete) {
-                const rowToDelete = itemsTableBody.querySelectorAll('tr')[index]; // Get the correct row based on index
+                const rowToDelete = itemsTableBody.querySelectorAll('tr')[index];
                 if (rowToDelete) {
                     const inputs = rowToDelete.querySelectorAll('input');
-                    const itemId = rowToDelete.dataset.itemid || ''; // Get item id from data-itemid
+                    const itemId = rowToDelete.dataset.itemid || '';
                     const deletedItem = {
                         id: itemId,
                         itemName: inputs[0].value,
@@ -137,20 +142,28 @@
                         total: (parseFloat(inputs[1].value) || 0) * (parseFloat(inputs[2].value) || 0)
                     };
 
-                    // Store the deleted item in the array
                     deletedItems.push(deletedItem);
 
-                    // Remove the row from the table
                     rowToDelete.remove();
 
-                    // Remove from temporary data
                     temporaryData.splice(index, 1);
 
-                    // Refresh row numbers after deletion
                     refreshRowNumbers();
                 }
             }
         });
+    }
+
+    // Function to store the original data of a row
+    function storeOriginalData(row, index) {
+        const inputs = row.querySelectorAll('input');
+        const originalData = {
+            itemName: inputs[0].value,
+            quantity: parseFloat(inputs[1].value) || 0,
+            price: parseFloat(inputs[2].value) || 0,
+            total: (parseFloat(inputs[1].value) || 0) * (parseFloat(inputs[2].value) || 0)
+        };
+        originalItemData[index] = originalData; // Store original data
     }
 
     // Event listener for adding a new row
@@ -163,6 +176,7 @@
     // Attach event listeners to existing rows
     itemsTableBody.querySelectorAll('tr').forEach((row, index) => {
         attachRowEventListeners(row, index);
+        storeOriginalData(row, index); // Store original data for existing rows
     });
 
     // Save entire order
@@ -180,7 +194,7 @@
 
         itemsTableBody.querySelectorAll('tr').forEach(row => {
             const inputs = row.querySelectorAll('input');
-            const itemId = row.dataset.itemid; 
+            const itemId = row.dataset.itemid;
             const item = {
                 id: itemId,
                 itemName: inputs[0].value,
@@ -223,7 +237,7 @@
                 if (response.ok) {
                     console.log('Items saved successfully!');
                     alert('Order saved successfully!');
-                    window.location.href = '/';  
+                    window.location.href = '/';
                 } else {
                     return response.text().then(text => { throw new Error(text); });
                 }

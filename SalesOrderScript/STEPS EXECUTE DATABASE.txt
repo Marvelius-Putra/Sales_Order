@@ -1,0 +1,27 @@
+1. Latest_SO_Schema.sql
+===============================================================
+	-> Consist of Existing Profescipta Database Schema and MY DATABASE
+
+2. SalesOrder_Script.sql
+===============================================================
+	-> Consist ONLY MY DATABASE Schema
+
+3. So Schema.sql
+================================================================
+	-> Consist ONLY PROFESCIPTA Database Schema
+
+
+
+Option 1 - using Latest_SO_Schema.sql
+=========================================================
+1. CREATE DATABASE [SQL2016.OL_DEV]
+2. Execute the ALL LATEST SO Schema
+
+
+
+Option 2 - Steps on using SalesOrder_Script and So Schema
+=========================================================
+1. CREATE DATABASE [SQL2016.OL_DEV]
+2. USE [SQL2016.OL_DEV]
+2. Execute So Schema.sql
+3. Execute SalesOrder_Script.sql

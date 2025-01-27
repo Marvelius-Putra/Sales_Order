@@ -1,0 +1,74 @@
+﻿@{
+    ViewData["Title"] = "Sales Order";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/salesOrder.css" asp-append-version="true">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+}
+<header>
+    <h1>Sales Order</h1>
+</header>
+<div class="container">
+    <div class="search-panel">
+        <div>
+            <label for="keywords">Keywords</label>
+            <input type="text" id="keywords" placeholder="Input Here">
+        </div>
+        <div>
+            <label for="order-date">Order Date</label>
+            <input type="text" id="order-date" placeholder="Pick Date">
+        </div>     
+        <div class="flex-container">
+            <button id="search-btn">Search</button>
+        </div>
+    </div> 
+    <div class="actions">
+        <button id="add-btn" class="add-data">Add New Data</button>
+        <button id="export-btn" class="export-excel">Export to Excel</button>
+    </div>
+    <table class="sales-table" id="salesOrderTable">
+        <thead>
+            <tr>
+                <th>No</th>
+                <th>Action</th>
+                <th>Sales Order</th>
+                <th>Order Date</th>
+                <th>Customer</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var order in Model)
+            {
+                <tr>
+                    <td>@order.Id</td>
+                    <td>
+                        <a href="/SalesOrder/Edit?id=@order.Id"
+                           class="edit-btn"
+                           data-customer="@order.Customer">
+                            ✎
+                        </a>
+                        <button class="delete-btn" data-id="@order.Id">🗑️</button>
+                    </td>
+                    <td>@order.OrderNumber</td>
+                    <td>@order.OrderDate.ToString("dd/MM/yyyy")</td>
+                    <td>@order.Customer</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <div class="pagination">
+        <button class="page-btn">«</button>
+        <button class="page-btn active">1</button>
+        <button class="page-btn">2</button>
+        <button class="page-btn">3</button>
+        <button class="page-btn">»</button>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <script src="~/js/salesOrder.js" asp-append-version="true"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+}

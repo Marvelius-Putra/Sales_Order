@@ -1,0 +1,21 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"] - Sales Order</title>
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true">
+    @RenderSection("Styles", required: false)
+</head>
+<body>
+    
+    <main>
+        @RenderBody()
+    </main>
+    <footer>
+@*         <p>&copy; @DateTime.Now.Year - My Application</p> *@
+    </footer>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

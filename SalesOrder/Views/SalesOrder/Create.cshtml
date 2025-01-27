@@ -1,0 +1,90 @@
+﻿@{
+    ViewData["Title"] = "ADD NEW - SALES ORDER";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/createOrder.css" asp-append-version="true">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+}
+<header>
+    <h1>ADD NEW - SALES ORDER</h1>
+</header>
+<h2>Sales Order Information ⮟</h2>
+<div class="sales-order">
+    <div>
+        <div class="form-row">
+            <label for="sales-order-number">Sales Order Number <span>*</span></label>
+            <input type="text" id="sales-order-number" placeholder="Input Here">
+        </div>
+        <div class="form-row">
+            <label for="order-date" id="order-date-label">Order Date <span>*</span></label>
+            <input type="text" id="order-date" placeholder="Pick Date">
+        </div>
+    </div>
+    <div>
+        <div class="form-row">
+            <label for="customer">Customer</label>
+            <select id="customer">
+                <option value="" disabled selected>Select One</option>
+                @foreach (var customer in ViewBag.Customers)
+                {
+                    <option value="@customer.Id">@customer.Name</option>
+                }
+            </select>
+        </div>
+        <div class="form-row">
+            <label for="address">Address</label>
+            <textarea type="text" id="address" placeholder="Input Here"></textarea>
+        </div>
+    </div>  
+</div>
+<h2>Detail Item Information ⮟</h2>
+<button id="add-item-btn">Add Item</button>
+<div class="section">
+    <table id="items-table">
+        <thead>
+            <tr>
+                <th>No</th>
+                <th>ACTION</th>
+                <th>ITEM NAME</th>
+                <th>QTY</th>
+                <th>PRICE</th>
+                <th>TOTAL</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="placeholder-row">
+                <td colspan="6" style="text-align: center;">No items added yet.</td>
+            </tr>
+        </tbody>
+    </table>
+
+
+    <div class="summary">
+        <span>Total Items: <strong id="total-item">0</strong></span>
+        <span>Total Amount: <strong id="total-amount">IDR 0.00</strong></span>
+
+@*         Total Item: <b id="total-item">0</b>
+        Total Amount: <b id="total-amount">IDR 0.00</b> *@
+    </div>
+
+    <div class="pagination">
+        <button>&laquo;</button>
+        <button class="active">1</button>
+        <button>2</button>
+        <button>3</button>
+        <button>&raquo;</button>
+    </div>
+</div>
+
+<div class="footer-buttons">
+    <button id="save-btn">Save</button>
+    <button id="close-btn">Close</button>
+</div>
+
+@section Scripts {
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <script src="~/js/createOrder.js" asp-append-version="true"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+}

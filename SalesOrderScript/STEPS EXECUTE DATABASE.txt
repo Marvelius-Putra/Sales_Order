@@ -15,7 +15,7 @@
 Option 1 - using Latest_SO_Schema.sql
 =========================================================
 1. CREATE DATABASE [SQL2016.OL_DEV]
-2. Execute the ALL LATEST SO Schema
+2. Execute the Latest_SO_Schema.sql
 
 
 

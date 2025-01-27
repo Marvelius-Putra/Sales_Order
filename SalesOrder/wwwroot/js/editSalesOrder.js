@@ -13,7 +13,7 @@
 
     let temporaryData = [];
     let deletedItems = [];
-    let originalItemData = []; // Store original data for rows
+    let originalItemData = []; 
 
     // Function to refresh row numbers
     function refreshRowNumbers() {
@@ -55,7 +55,7 @@
         cancelBtn.style.display = 'inline-block';
 
         attachRowEventListeners(newRow, newRowIndex);
-        storeOriginalData(newRow, newRowIndex); // Store original data for the new row
+        storeOriginalData(newRow, newRowIndex); 
     }
 
     // Function to attach event listeners to row buttons
@@ -103,13 +103,13 @@
         });
 
         cancelBtn.addEventListener('click', function () {
-            const savedData = originalItemData[index]; // Get original data
+            const savedData = originalItemData[index]; 
 
             // Restore the original values
             const inputs = row.querySelectorAll('input');
-            inputs[0].value = savedData.itemName;  // Item Name
-            inputs[1].value = savedData.quantity;  // Qty
-            inputs[2].value = savedData.price;     // Price
+            inputs[0].value = savedData.itemName;  
+            inputs[1].value = savedData.quantity;  
+            inputs[2].value = savedData.price;     
 
             // Update the "Total" column
             row.querySelector('td:last-child').textContent = savedData.total.toLocaleString('id-ID');
@@ -163,7 +163,7 @@
             price: parseFloat(inputs[2].value) || 0,
             total: (parseFloat(inputs[1].value) || 0) * (parseFloat(inputs[2].value) || 0)
         };
-        originalItemData[index] = originalData; // Store original data
+        originalItemData[index] = originalData;
     }
 
     // Event listener for adding a new row
@@ -176,7 +176,7 @@
     // Attach event listeners to existing rows
     itemsTableBody.querySelectorAll('tr').forEach((row, index) => {
         attachRowEventListeners(row, index);
-        storeOriginalData(row, index); // Store original data for existing rows
+        storeOriginalData(row, index); 
     });
 
     // Save entire order

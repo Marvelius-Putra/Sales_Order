@@ -1,8 +1,8 @@
 # SalesOrder
 Sales Order application is a simple application to manage customer's sales order items. This application consists of 3 pages:
 - HomePage -> Display all customers or Delete their sales order
-- CreatePage -> Allow user to Add new items in their sales order
-- Edit Page -> Allow user to Add, Edit, or Delete their sales order based on their ID
+- CreatePage -> Allow users to Add new items in their sales order
+- Edit Page -> Allow users to Add, Edit, or Delete their sales order based on their ID
 
 ## Key Features
 - Create or Add Items
@@ -36,11 +36,11 @@ This is the Create Page to add and save new items to the database. You will see 
 ![image](https://github.com/user-attachments/assets/3e7dfcf2-78c0-43ad-b52b-a68fa2aa071b)
 
 ### 3. Edit Page
-Go to edit icon from the home page direct to edit page.
+Go to the edit icon from the home page and it will go directly to the edit page.
 This is the Edit page to Add, Edit, and Delete the items in the database. You will see the pop-up message, once the item is successfully saved.
 ![image](https://github.com/user-attachments/assets/53f16c8f-a628-4d8a-85e0-e2498241fa64)
 
-#### Modifiy Items
+#### Modify Items
 ![image](https://github.com/user-attachments/assets/188d1f23-4e43-4878-9b0e-23f4041c8e5e)
 
 #### Save Changes

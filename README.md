@@ -15,7 +15,7 @@ Sales Order application is a simple application to manage customer's sales order
 ## Steps on Run Application (Local)
 - Download all the script file
 - Execute the database in your SSMS
-  read on how to execute the database in [here](https://github.com/Marvelius-Putra/Sales_Order/blob/master/SalesOrderScript/STEPS%20EXECUTE%20DATABASE.txt)
+  - read on how to execute the database in [here](https://github.com/Marvelius-Putra/Sales_Order/blob/master/SalesOrderScript/STEPS%20EXECUTE%20DATABASE.txt)
 - Download the Source Code 
 - Go to **appSettings.json** and make sure the **connection string value** is connected to your database
 - Run or build the application

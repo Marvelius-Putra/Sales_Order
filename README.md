@@ -12,7 +12,7 @@ Sales Order application is a simple application to manage customer's sales order
 - Update, Modify, and Insert Existing Items
 - Delete Items
 
-## Steps on Run Application (Local)
+## Steps on Run Application (Local) - [Demo Video Here](https://youtu.be/4cl0nAxNS1k)
 - Download all the script file
 - Execute the database in your SSMS
   - read on how to execute the database in [here](https://github.com/Marvelius-Putra/Sales_Order/blob/master/SalesOrderScript/STEPS%20EXECUTE%20DATABASE.txt)

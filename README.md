@@ -44,7 +44,11 @@ This is the Edit page to Add, Edit, and Delete the items in the database. You wi
 ![image](https://github.com/user-attachments/assets/188d1f23-4e43-4878-9b0e-23f4041c8e5e)
 
 #### Save Changes
-![image](https://github.com/user-attachments/assets/69aadfd3-007d-4fad-befd-e8a171384504)
+![image](https://github.com/user-attachments/assets/b51e2805-441d-4e77-8993-c92c0907c0ee)
+
+![image](https://github.com/user-attachments/assets/c5f47ce9-fdd9-41a9-8a94-43bdc44c3b1a)
+
+
 
 
 
